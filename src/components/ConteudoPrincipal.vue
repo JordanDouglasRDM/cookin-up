@@ -3,12 +3,21 @@
 import SelecionarIngredientes from "@/components/SelecionarIngredientes.vue";
 import Tag from "@/components/Tag.vue";
 import SuaLista from "@/components/SuaLista.vue";
+import BotaoPrincipal from "@/components/BotaoPrincipal.vue";
 
 export default {
-  components: {SuaLista, Tag, SelecionarIngredientes},
+  components: {BotaoPrincipal, SuaLista, Tag, SelecionarIngredientes},
   data() {
-    return {
-      ingredientes: ['Alho', 'Manteiga', 'Orégano']
+    return { //estado
+      ingredientes: [] as string[]
+    }
+  },
+  methods: {
+    adicionarIngrediente(ingrediente: string) {
+      this.ingredientes.push(ingrediente)
+    },
+    removerIngrediente(ingrediente: string){
+      this.ingredientes = this.ingredientes.filter(iLista => ingrediente !== iLista);
     }
   }
 }
@@ -18,7 +27,11 @@ export default {
 <template>
   <main class="conteudo-principal">
     <SuaLista :ingredientes="ingredientes"/>
-    <SelecionarIngredientes/>
+    <SelecionarIngredientes
+        @adicionarIngrediente="adicionarIngrediente($event)"
+        @removerIngrediente="removerIngrediente($event)"
+    />
+    <BotaoPrincipal texto="Buscar Receitas!"/>
   </main>
 
 </template>
