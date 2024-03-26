@@ -1,9 +1,11 @@
 <script lang="ts">
 
 import SelecionarIngredientes from "@/components/SelecionarIngredientes.vue";
+import Tag from "@/components/Tag.vue";
+import SuaLista from "@/components/SuaLista.vue";
 
 export default {
-  components: {SelecionarIngredientes},
+  components: {SuaLista, Tag, SelecionarIngredientes},
   data() {
     return {
       ingredientes: ['Alho', 'Manteiga', 'Orégano']
@@ -15,33 +17,14 @@ export default {
 
 <template>
   <main class="conteudo-principal">
-    <section>
-      <span class="subtitulo-lg sua-lista-texto">
-        Sua lista:
-      </span>
-      <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
-        <!--   v-for = diretiva do vue  -->
-
-        <!--v-bind é uma diretiva do vue que atribui um identificador único para cada item -->
-        <!--Assim:  v-bind:key="ingrediente" -->
-        <!--Ou Assim:        :key="ingrediente"-->
-
-        <li v-for="ingrediente in ingredientes" v-bind:key="ingrediente" class="ingrediente">
-          {{ ingrediente }}
-        </li>
-      </ul>
-
-      <p v-else class="paragrafo lista-vazia">
-        <img src="../assets/images/icones/lista-vazia.svg" alt="ícone de pesquisa">
-        Sua lista está vazia, selecione ingredientes para iniciar.
-      </p>
-    </section>
+    <SuaLista :ingredientes="ingredientes"/>
     <SelecionarIngredientes/>
   </main>
 
 </template>
 
 <style scoped>
+
 .conteudo-principal {
   padding: 6.5rem 7.5rem;
   border-radius: 3.75rem 3.75rem 0rem 0rem;
@@ -52,43 +35,6 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 5rem;
-}
-
-.sua-lista-texto {
-  color: var(--coral, #F0633C);
-  display: block;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.ingredientes-sua-lista {
-  display: flex;
-  justify-content: center;
-  gap: 1rem 1.5rem;
-  flex-wrap: wrap;
-}
-
-.ingrediente {
-  display: inline-block;
-  border-radius: 0.5rem;
-  min-width: 4.25rem;
-  padding: 0.5rem;
-  text-align: center;
-  transition: 0.2s;
-  color: var(--creme, #FFFAF3);
-  background: var(--coral, #F0633C);
-  font-weight: 700;
-}
-
-.lista-vazia {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-
-  color: var(--coral, #F0633C);
-  text-align: center;
 }
 
 @media only screen and (max-width: 1300px) {
